@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.querySelector('.navbar');
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
     // Add scroll event listener
     window.addEventListener('scroll', () => {
         // Sticky Header Effect
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
             navbar.style.padding = '0';
             navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
         }
-        
+
         // Active Link Highlighting
         let current = '';
         sections.forEach(section => {
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 current = section.getAttribute('id');
             }
         });
-        
+
         navLinks.forEach(link => {
             link.classList.remove('active');
             if (link.getAttribute('href').includes(current)) {
@@ -40,14 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Mobile Menu Toggle ---
     const mobileToggle = document.querySelector('.mobile-toggle');
     const navList = document.querySelector('.nav-list');
-    
+
     if (mobileToggle) {
         mobileToggle.addEventListener('click', () => {
             navList.classList.toggle('show-menu');
-            
+
             // Toggle Icon
             const icon = mobileToggle.querySelector('i');
-            if(navList.classList.contains('show-menu')){
+            if (navList.classList.contains('show-menu')) {
                 icon.classList.remove('ph-list');
                 icon.classList.add('ph-x');
             } else {
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const headerOffset = 80; // Height of sticky navbar
                 const elementPosition = target.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-                
+
                 window.scrollTo({
                     top: offsetPosition,
                     behavior: "smooth"
@@ -85,41 +85,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Testimonials Slider functionality ---
-    const track = document.getElementById('testimonialsTrack');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    
-    if (track && prevBtn && nextBtn) {
-        // Calculate scroll amount based on card width + gap
-        const scrollAmount = 380; // Base card width + gap approx
-        
-        nextBtn.addEventListener('click', () => {
-            track.scrollBy({
-                left: scrollAmount,
-                behavior: 'smooth'
-            });
-        });
-        
-        prevBtn.addEventListener('click', () => {
-            track.scrollBy({
-                left: -scrollAmount,
-                behavior: 'smooth'
-            });
-        });
-        
-        // Optional: Hide buttons if at endpoints
-        track.addEventListener('scroll', () => {
-            const maxScrollLeft = track.scrollWidth - track.clientWidth;
-            
-            // Allow minor tolerance for rounding issues
-            prevBtn.style.opacity = track.scrollLeft <= 5 ? '0.5' : '1';
-            nextBtn.style.opacity = track.scrollLeft >= maxScrollLeft - 5 ? '0.5' : '1';
-        });
-        
-        // Initialize button states
-        setTimeout(() => {
-            prevBtn.style.opacity = '0.5';
-        }, 100);
-    }
 });
